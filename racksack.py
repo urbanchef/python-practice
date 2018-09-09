@@ -29,22 +29,20 @@ def continuous_racksack():
     for _ in range(num_of_items):
         items.append(tuple(int(i) for i in input().split()))
 
-    items_sorted = sorted(items, key=lambda x: (x[1], -x[0]))
+    items_sorted = sorted(items, key=lambda x: x[0] / x[1], reverse=True)
 
-    current_size = 0
     max_price = 0
+
     for item in items_sorted:
         if item[0] == 0:
             continue
-        elif (current_size + item[1]) <= racksack_size:
-            current_size += item[1]
+        elif item[1] <= racksack_size:
+            racksack_size -= item[1]
             max_price += item[0]
         else:
-            item_piece = [item[0], item[1]]
-            item_piece[1] = (racksack_size - current_size) / item_piece[1]
-            item_piece[0] *= item_piece[1]
-            current_size += item_piece[1]
-            max_price += item_piece[0]
+            piece_size = racksack_size / item[1]
+            piece_price = item[0] * piece_size
+            max_price += piece_price
     print("{:.3f}".format(max_price))
 
 
