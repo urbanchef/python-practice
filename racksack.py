@@ -41,9 +41,8 @@ def continuous_racksack():
             max_price += item[0]
         else:
             item_piece = [item[0], item[1]]
-            while (current_size + item_piece[1]) > racksack_size:
-                item_piece[0] /= 1.001
-                item_piece[1] /= 1.001
+            item_piece[1] = (racksack_size - current_size) / item_piece[1]
+            item_piece[0] *= item_piece[1]
             current_size += item_piece[1]
             max_price += item_piece[0]
     print("{:.3f}".format(max_price))
