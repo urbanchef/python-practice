@@ -29,7 +29,7 @@ def continuous_racksack():
     for _ in range(num_of_items):
         items.append(tuple(int(i) for i in input().split()))
 
-    items_sorted = sorted(items, key=lambda x: x[1])
+    items_sorted = sorted(items, key=lambda x: (x[1], -x[0]))
 
     current_size = 0
     max_price = 0
